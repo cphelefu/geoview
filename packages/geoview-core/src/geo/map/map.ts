@@ -26,6 +26,7 @@ import { NotificationsApi } from '@/core/components/notifications/notifications-
 import { LegendApi } from '@/core/components/legend/legend-api';
 import { Legend2Api } from '@/core/components/legend-2/legend-api';
 import { DetailsAPI } from '@/core/components/details/details-api';
+import { DetailsAPI as DetailsAPIFooter } from '@/core/components/details-1/details-api';
 import { FeatureInfoAPI } from '@/core/components/feature-info/feature-info.api';
 import { DataGridAPI } from '@/core/components/data-grid/data-grid-api';
 import { DataTableApi } from '@/core/components/data-table/data-table-api';
@@ -86,11 +87,14 @@ export class MapViewer {
 
   // used to access the legend api
   legend!: LegendApi;
-  legend2!: Legend2Api;
 
   // used to access the footer tabs api
   // TODO: Keep only FeatureInfo after refactor
+  // used to access the existing detials, will be shown in Details Panel in app bar
   details!: DetailsAPI;
+
+  // used to access the details in footer
+  detailsFooter!: DetailsAPIFooter;
 
   featureInfo!: FeatureInfoAPI;
 
@@ -163,8 +167,8 @@ export class MapViewer {
     this.navBarButtons = new NavbarButtons(this.mapId);
     this.footerTabs = new FooterTabsApi(this.mapId);
     this.legend = new LegendApi(this.mapId);
-    this.legend2 = new Legend2Api(this.mapId);
     this.details = new DetailsAPI(this.mapId);
+    this.detailsFooter = new DetailsAPIFooter(this.mapId);
     this.featureInfo = new FeatureInfoAPI(this.mapId);
     this.dataGrid = new DataGridAPI(this.mapId);
     this.dataTable = new DataTableApi(this.mapId);
