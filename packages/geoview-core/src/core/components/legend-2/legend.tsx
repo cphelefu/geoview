@@ -38,7 +38,7 @@ export function Legend2(props: LegendProps): JSX.Element {
     setSelectedLayer(null);
     setTimeout(() => {
       setSelectedLayer(det);
-    }, 300);
+    }, 500);
   };
 
   api.event.emit({ handlerName: `${mapId}/$LegendsLayerSet$`, event: api.eventNames.GET_LEGENDS.TRIGGER });
@@ -72,15 +72,15 @@ export function Legend2(props: LegendProps): JSX.Element {
 
   return (
     <Box sx={{ px: '20px', pb: '20px', display: 'flex', flexDirection: 'column' }}>
-      <h2 style={{ marginBottom: '10px' }}>Legend</h2>
+      <h3 style={{ marginBottom: '20px' }}>Legend Overview</h3>
       <Grid container direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 4, md: 8 }}>
-        <Grid item xs={12} sm={4}>
-          <p>Left Pane</p>
+        <Grid item xs={12} sm={6} style={{ backgroundColor: 'lightgrey',width:'100%', height: '100%' }}>
+          {/* <p>Left Pane</p> */}
           <Item>{leftPanel()}</Item>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <p>Right Pane</p>
-          <Item>{selectedLayer && <LegendItemDetails {...selectedLayer} />}</Item>
+        <Grid item xs={12} sm={6} style={{ backgroundColor: 'darkgrey',width:'100%', height: '100%' }}>
+          {/* <p>Right Pane</p> */}
+          <Item>{rightPanel()}</Item>
         </Grid>
       </Grid>
     </Box>
