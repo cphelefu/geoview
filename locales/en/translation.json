@@ -56,7 +56,10 @@
     "overview_title": "Legend Overview",
     "add_layer": "Add Layer",
     "selected_legend": "Selected Legend",
-    "sort_layers": "Sort Layers"
+    "sort_layers": "Sort Layers",
+    "selected_Layers": "An overview of currrently selected layers",
+    "re-arrange": "re-arrange",
+    "categories_title" : "Categories"
   },
   "details": {
     "zoom_to": "Zoom to feature",
@@ -66,8 +69,14 @@
     "detailsView": "Details View",
     "selectVisbleLayer": "Select any visible layer on the map to get started",
     "availableLayers": "Available Layers",
-    "selectedFeature": "Selected Feature"
-
+    "selectedFeature": "Selected Feature",
+    "feature": "feature",
+    "clickOnMap": "Click on map",
+    "nextFeatureBtn": "Next feature",
+    "previousFeatureBtn": "Previous feature",
+    "clearAllfeatures": "Clear all feature highlights",
+    "highlightFeaturesOnMap": "Highlight features on map",
+    "keepFeatureSelected": "Keep feature selected"
   },
   "lightbox": {
     "next": "Next",
