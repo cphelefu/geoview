@@ -20,7 +20,6 @@ import { getGeoViewStore } from '@/core/stores/stores-managers';
 
 import { NorthArrow, NorthPoleFlag } from '@/core/components/north-arrow/north-arrow';
 import { Crosshair } from '@/core/components/crosshair/crosshair';
-import { Footerbar } from '@/core/components/footer-bar/footer-bar';
 import { OverviewMap } from '@/core/components/overview-map/overview-map';
 import { ClickMarker } from '@/core/components/click-marker/click-marker';
 import { HoverTooltip } from '@/core/components/hover-tooltip/hover-tooltip';
@@ -40,6 +39,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    height: '100%',
     position: 'relative',
   },
 }));
@@ -79,12 +79,12 @@ export function Map(mapFeaturesConfig: TypeMapFeaturesConfig): JSX.Element {
   //     const splitZoom =
   //       (api.maps[mapId].layer.registeredLayers[clusterLayerId].source as TypeVectorSourceInitialConfig)!.cluster!.splitZoom || 7;
   //     if (prevZoom < splitZoom && currentZoom >= splitZoom) {
-  //       api.maps[mapId].layer.registeredLayers[clusterLayerId]?.gvLayer!.setVisible(false);
-  //       api.maps[mapId].layer.registeredLayers[layer]?.gvLayer!.setVisible(true);
+  //       api.maps[mapId].layer.registeredLayers[clusterLayerId]?.olLayer!.setVisible(false);
+  //       api.maps[mapId].layer.registeredLayers[layer]?.olLayer!.setVisible(true);
   //     }
   //     if (prevZoom >= splitZoom && currentZoom < splitZoom) {
-  //       api.maps[mapId].layer.registeredLayers[clusterLayerId]?.gvLayer!.setVisible(true);
-  //       api.maps[mapId].layer.registeredLayers[layer]?.gvLayer!.setVisible(false);
+  //       api.maps[mapId].layer.registeredLayers[clusterLayerId]?.olLayer!.setVisible(true);
+  //       api.maps[mapId].layer.registeredLayers[layer]?.olLayer!.setVisible(false);
   //     }
   //   }
   // });
@@ -213,7 +213,7 @@ export function Map(mapFeaturesConfig: TypeMapFeaturesConfig): JSX.Element {
             }
           }
         };
-        refreshBaseLayer(mapLayerEntry[1].gvLayers);
+        refreshBaseLayer(mapLayerEntry[1].olLayers);
       });
     }
   };
@@ -245,7 +245,6 @@ export function Map(mapFeaturesConfig: TypeMapFeaturesConfig): JSX.Element {
           <ClickMarker />
           <HoverTooltip />
           {deviceSizeMedUp && overviewMap && overviewBaseMap && <OverviewMap />}
-          {deviceSizeMedUp && <Footerbar />}
         </>
       )}
     </div>

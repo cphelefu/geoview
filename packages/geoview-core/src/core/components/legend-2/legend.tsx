@@ -1,14 +1,14 @@
-import { Button, FormControlLabel, FormGroup, styled, useTheme } from '@mui/material';
-import React, { useState } from 'react';
+import { Button, styled, useTheme, Table } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import { useStore } from 'zustand';
 import { useTranslation } from 'react-i18next';
 import { api } from '@/app';
 import { LegendItemsDetailsProps } from './types';
-import { AddIcon, Box, Checkbox, Grid, List, Typography, ExpandMoreIcon } from '@/ui';
+import { AddIcon, Box, Grid, List, Typography, ExpandMoreIcon, Paper, Stack, ExpandIcon } from '@/ui';
 import { LegendItemDetails } from './legend-item-details/legend-item-details';
 import { getGeoViewStore } from '@/core/stores/stores-managers';
 import { LegendItem } from './legend-item';
-import { ShowSelectedLayers } from './selected-layers/selected-layers-details';
+import { getSxClasses } from './legend-style';
 
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#262B32' : '#fff',
@@ -23,53 +23,70 @@ export function Legend2(props: LegendItemsDetailsProps): JSX.Element {
   const { t } = useTranslation<string>();
 
   const theme = useTheme();
-  const sxClasses = {
-    legendContainer: {
-      background: theme.footerPanel.contentBg,
-      boxShadow: theme.footerPanel.contentShadow,
-      padding: '40px 20px 20px 20px',
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    legendTitle: {
-      textAlign: 'left',
-      fontFamily: 'Open Sans, Semibold',
-      fontSize: '18px',
-    },
-    categoryTitle: {
-      textAlign: 'left',
-      fontFamily: 'Open Sans, Semibold',
-      fontSize: '20px',
-    },
-    legendButtonText: {
-      fontFamily: 'Open Sans, Semibold',
-      color: '#515BA5',
-      fontSize: '16px',
-    },
-  };
+  const sxClasses = getSxClasses(theme);
 
   const store = getGeoViewStore(mapId);
   const selectedLegendItem = useStore(store, (state) => state.legendState.selectedItem);
+  const selectedLayers = useStore(store, (state) => state.legendState.selectedLayers);
   const [isSelectedLayersClicked, setIsSelectedLayersClicked] = useState(false);
+  const [collapsedParents, setCollapsedParents] = useState<{ [key: string]: boolean }>({});
 
-  const onSelectedLayersClick = () => {
-    setIsSelectedLayersClicked(!isSelectedLayersClicked);
+  const toggleCollapse = (parentLayer: string) => {
+    setCollapsedParents((prevCollapsedParents) => ({
+      ...prevCollapsedParents,
+      [parentLayer]: !prevCollapsedParents[parentLayer],
+    }));
   };
 
   function showSelectedLayersPanel() {
     return (
-      <Box
-        onClick={onSelectedLayersClick}
+      <Paper
+        onClick={() => setIsSelectedLayersClicked(!isSelectedLayersClicked)}
         sx={{
+          justifyContent: 'space-between',
+          padding: '9px 17px 10px 57px',
+          alignItems: 'center',
+          marginBottom: '27px',
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between',
-          margin: '20px',
           cursor: 'pointer',
         }}
       >
-        {t('legend.selected_Layers')}
-        <ExpandMoreIcon sx={{ transform: 'rotate(270deg)' }} />
+        <div>
+          <Typography sx={sxClasses.legendTitle}>{t('legend.overview_title')}</Typography>
+          <Typography sx={{ fontSize: '0.6em' }}>{t('legend.selected_Layers')}</Typography>
+        </div>
+        <div>
+          <ExpandMoreIcon sx={{ transform: 'rotate(270deg)' }} />
+        </div>
+      </Paper>
+    );
+  }
+
+  function buttonsMenu() {
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '15px' }}>
+        <div>
+          <Typography sx={sxClasses.categoryTitle}>{t('legend.categories_title')}</Typography>
+        </div>
+        <Stack style={{ alignItems: 'center', gap: '15px' }} direction="row">
+          <Button
+            variant="contained"
+            size="small"
+            sx={{ backgroundColor: '#F4F5FF' }}
+            startIcon={<ExpandIcon fontSize="small" sx={{ color: '#515BA5' }} />}
+          >
+            <Typography sx={sxClasses.legendButtonText}>{t('legend.re-arrange')}</Typography>
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            sx={{ backgroundColor: '#F4F5FF' }}
+            startIcon={<AddIcon fontSize="small" sx={{ color: '#515BA5' }} />}
+          >
+            <Typography sx={sxClasses.legendButtonText}>{t('legend.add_layer')}</Typography>
+          </Button>
+        </Stack>
       </Box>
     );
   }
@@ -96,36 +113,81 @@ export function Legend2(props: LegendItemsDetailsProps): JSX.Element {
     return (
       <div>
         {showSelectedLayersPanel()}
+        {buttonsMenu()}
         <List sx={{ width: '100%' }}>{legendItems}</List>
       </div>
     );
   };
 
-  function rightPanel() {
-    if (isSelectedLayersClicked) {
-      return <ShowSelectedLayers />;
+  useEffect(() => {
+    if (selectedLegendItem) {
+      setIsSelectedLayersClicked(false);
     }
+  }, [selectedLegendItem]);
+
+  const rightPanel = () => {
+    if (isSelectedLayersClicked && selectedLayers) {
+      const numItems = Object.values(selectedLayers).reduce((total, childLayers) => total + childLayers.length, 0);
+      const selectedLayersList = Object.entries(selectedLayers).map(([parentLayer, childLayers]) => (
+        <div
+          key={parentLayer}
+          role="button"
+          tabIndex={0}
+          onClick={() => toggleCollapse(parentLayer)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              toggleCollapse(parentLayer);
+            }
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '2px 4px 2px 4px' }}>
+            {parentLayer}
+            {collapsedParents[parentLayer] ? <ExpandMoreIcon sx={{ transform: 'rotate(180deg)' }} /> : <ExpandMoreIcon />}
+          </div>
+          <div style={{ padding: '2px 5px 2px 4px' }}>
+            {!collapsedParents[parentLayer] &&
+              childLayers.map((childLayer) => (
+                <Table key={childLayer.layer} sx={{ border: '1px solid #C1C1C1', textAlign: 'left' }}>
+                  {childLayer.icon ? <img src={childLayer.icon} alt="Layer Icon" /> : null}
+                  {childLayer.layer}
+                </Table>
+              ))}
+          </div>
+        </div>
+      ));
+
+      return (
+        <Item sx={{ borderColor: 'primary.main', borderStyle: 'solid', borderWidth: '1px', paddingLeft: '10px' }}>
+          <Typography sx={sxClasses.legendTitle}>
+            <strong>{t('legend.bold_selection')}</strong> {t('legend.overview_title')}
+          </Typography>
+          <Typography sx={{ fontSize: '0.6em', textAlign: 'left', marginBottom: '16.5px' }}>
+            {numItems} {t('legend.items_available')}
+          </Typography>
+          {selectedLayersList}
+        </Item>
+      );
+    }
+
     if (selectedLegendItem) {
       return (
-        <>
-          <Typography sx={sxClasses.legendTitle}>{t('legend.selected_legend')}</Typography>
-          <Item>
-            <LegendItemDetails
-              key={`layerKey-${selectedLegendItem.layerId}`}
-              layerId={selectedLegendItem.layerId}
-              geoviewLayerInstance={selectedLegendItem?.geoviewLayerInstance}
-              isRemoveable={selectedLegendItem.isRemoveable}
-              canSetOpacity={selectedLegendItem.canSetOpacity}
-              expandAll={selectedLegendItem.expandAll}
-              hideAll={selectedLegendItem?.hideAll}
-            />
-          </Item>
-        </>
+        <Item>
+          <LegendItemDetails
+            key={`layerKey-${selectedLegendItem.layerId}`}
+            layerId={selectedLegendItem.layerId}
+            geoviewLayerInstance={selectedLegendItem?.geoviewLayerInstance}
+            isRemoveable={selectedLegendItem.isRemoveable}
+            canSetOpacity={selectedLegendItem.canSetOpacity}
+            expandAll={selectedLegendItem.expandAll}
+            hideAll={selectedLegendItem?.hideAll}
+            isParentVisible={selectedLegendItem.geoviewLayerInstance.getVisible(selectedLegendItem.layerConfigEntry!)}
+          />
+        </Item>
       );
     }
 
     return null;
-  }
+  };
 
   return (
     <Box sx={sxClasses.legendContainer}>

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme, Theme } from '@mui/material/styles';
 import { transformExtent } from 'ol/proj';
 import { Extent } from 'ol/extent';
+import { getGeoViewStore } from '@/core/stores/stores-managers';
 import {
   Box,
   ListItem,
@@ -100,7 +101,6 @@ const sxClasses = {
     },
   },
   iconPreviewStacked: {
-    // marginLeft: 8,
     padding: 0,
     borderRadius: 0,
     border: '1px solid',
@@ -124,8 +124,9 @@ const sxClasses = {
  *
  * @returns {JSX.Element} the legend list item
  */
+
 export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Element {
-  const { layerId, geoviewLayerInstance, subLayerId, layerConfigEntry, isRemoveable, isParentVisible } = props;
+  const { layerId, geoviewLayerInstance, subLayerId, layerConfigEntry, isRemoveable } = props;
 
   const { t, i18n } = useTranslation<string>();
   const theme: Theme & {
@@ -134,16 +135,13 @@ export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Elemen
 
   const { mapId } = geoviewLayerInstance;
   // check if layer is a clustered, so that clustering can be toggled
-  const path = subLayerId || `${layerId}/${geoviewLayerInstance.activeLayer?.layerId}`;
+  const path = subLayerId || `${layerId}/${geoviewLayerInstance.listOfLayerEntryConfig[0]?.layerId}`;
   const clusterLayerPath = path.replace('-unclustered', '');
   const unclusterLayerPath = `${clusterLayerPath}-unclustered`;
   const canCluster = !!api.maps[mapId].layer.registeredLayers[unclusterLayerPath];
+  const [checkIsGroup, setcheckIsGroup_] = useState(false);
 
   const [isClusterToggleEnabled, setIsClusterToggleEnabled] = useState(false);
-  const [isChecked, setChecked] = useState<boolean>(
-    api.maps[mapId].layer.registeredLayers[clusterLayerPath]?.initialSettings?.visible !== 'no'
-  );
-
   const [isLegendOpen, setLegendOpen] = useState(true);
   const [groupItems, setGroupItems] = useState<TypeListOfLayerEntryConfig>([]);
   const [iconType, setIconType] = useState<string | null>(null);
@@ -162,12 +160,17 @@ export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Elemen
   const stackIconRef = useRef() as MutableRefObject<HTMLDivElement | undefined>;
   const maxIconRef = useRef() as RefObject<HTMLButtonElement>;
 
+  const [checkedSublayerNamesAndIcons, setCheckedSublayerNamesAndIcons] = useState<{ layer: string; icon: string }[]>([]);
+  const [nochildLayers, setnochildLayers] = useState<{ layer: string; icon: string }[]>([]);
+  const store = getGeoViewStore(mapId);
+
   const getGroupsDetails = (): boolean => {
     let isGroup = false;
     if (layerConfigEntry) {
       if (layerEntryIsGroupLayer(layerConfigEntry)) {
         setGroupItems(layerConfigEntry.listOfLayerEntryConfig);
         isGroup = true;
+        setcheckIsGroup_(!setcheckIsGroup_);
       }
     } else if (
       geoviewLayerInstance?.listOfLayerEntryConfig &&
@@ -175,9 +178,15 @@ export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Elemen
     ) {
       setGroupItems(geoviewLayerInstance?.listOfLayerEntryConfig);
       isGroup = true;
+      setcheckIsGroup_(!setcheckIsGroup_);
     }
+    console.log('is GROUP', isGroup);
+    console.log('checkIs GROUP', checkIsGroup);
+
     return isGroup;
   };
+
+  console.log(groupItems);
 
   const getLegendDetails = (layerLegend: TypeLegend) => {
     const { geoviewLayerId } = geoviewLayerInstance;
@@ -270,7 +279,7 @@ export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Elemen
     getLayerName();
     const isGroup = getGroupsDetails();
     if (!isGroup) {
-      setOpacity(geoviewLayerInstance.getOpacity() ?? 1);
+      setOpacity(geoviewLayerInstance.getOpacity(geoviewLayerInstance.listOfLayerEntryConfig[0]) ?? 1);
       const legendInfo = api.maps[mapId].legend.legendLayerSet.resultSets?.[path]?.data;
       if (legendInfo) {
         getLegendDetails(legendInfo);
@@ -294,18 +303,37 @@ export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Elemen
     mapId
   );
 
-  useEffect(() => {
-    if (layerConfigEntry) {
-      if (isParentVisible && isChecked) {
-        geoviewLayerInstance.setVisible(true, layerConfigEntry);
-      } else {
-        geoviewLayerInstance.setVisible(false, layerConfigEntry);
-      }
+  const updateSelectedLayers = (selectedLayers: { layer: string; icon: string }[]) => {
+    const selectedLayersByLayerName: Record<string, { layer: string; icon: string }[]> = {};
+    if (selectedLayers.length > 0) {
+      selectedLayers.forEach(({ layer, icon }) => {
+        if (!selectedLayersByLayerName[layerName]) {
+          selectedLayersByLayerName[layerName] = [{ layer, icon: icon || '' }];
+        } else {
+          selectedLayersByLayerName[layerName].push({ layer, icon: icon || '' });
+        }
+      });
     } else {
-      // parent layer with no sub layers
-      geoviewLayerInstance.setVisible(isChecked);
+      selectedLayersByLayerName[layerName] = [];
     }
-  }, [isParentVisible, isChecked, layerConfigEntry, geoviewLayerInstance]);
+
+    store.setState({
+      legendState: { ...store.getState().legendState, selectedLayers: selectedLayersByLayerName },
+    });
+  };
+
+  const handleGetCheckedSublayerNames = (namesAndIcons: { layer: string; icon: string }[]) => {
+    setCheckedSublayerNamesAndIcons(namesAndIcons);
+  };
+
+  useEffect(() => {
+    if (checkedSublayerNamesAndIcons.length > 0) {
+      updateSelectedLayers(checkedSublayerNamesAndIcons);
+    } else {
+      setnochildLayers([]);
+      updateSelectedLayers(nochildLayers);
+    }
+  }, [checkedSublayerNamesAndIcons, nochildLayers]);
 
   useEffect(() => {
     const mapZoomHandler = (payload: PayloadBaseClass) => {
@@ -330,23 +358,23 @@ export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Elemen
       geoviewLayerInstance.setOpacity((opacityValue as number) / 100, clusterLayerPath);
       geoviewLayerInstance.setOpacity((opacityValue as number) / 100, unclusterLayerPath);
     } else if (subLayerId) geoviewLayerInstance.setOpacity((opacityValue as number) / 100, subLayerId);
-    else geoviewLayerInstance.setOpacity((opacityValue as number) / 100);
+    else geoviewLayerInstance.setOpacity((opacityValue as number) / 100, geoviewLayerInstance.listOfLayerEntryConfig[0]);
   };
 
   const handleClusterToggle = () => {
-    if (api.maps[mapId].layer.registeredLayers[clusterLayerPath]?.gvLayer) {
-      api.maps[mapId].layer.registeredLayers[clusterLayerPath]?.gvLayer!.setVisible(
-        !api.maps[mapId].layer.registeredLayers[clusterLayerPath]?.gvLayer!.getVisible()
+    if (api.maps[mapId].layer.registeredLayers[clusterLayerPath]?.olLayer) {
+      api.maps[mapId].layer.registeredLayers[clusterLayerPath]?.olLayer!.setVisible(
+        !api.maps[mapId].layer.registeredLayers[clusterLayerPath]?.olLayer!.getVisible()
       );
-      api.maps[mapId].layer.registeredLayers[unclusterLayerPath]?.gvLayer!.setVisible(
-        !api.maps[mapId].layer.registeredLayers[unclusterLayerPath]?.gvLayer!.getVisible()
+      api.maps[mapId].layer.registeredLayers[unclusterLayerPath]?.olLayer!.setVisible(
+        !api.maps[mapId].layer.registeredLayers[unclusterLayerPath]?.olLayer!.getVisible()
       );
     }
     setIsClusterToggleEnabled(!isClusterToggleEnabled);
   };
 
-  const handleZoomTo = () => {
-    let bounds = api.maps[mapId].layer.geoviewLayers[layerId].calculateBounds(path);
+  const handleZoomTo = async () => {
+    let bounds = await api.maps[mapId].layer.geoviewLayers[layerId].calculateBounds(path);
     let transformedBounds: Extent | undefined;
     if (bounds) transformedBounds = transformExtent(bounds, `EPSG:${api.maps[mapId].currentProjection}`, `EPSG:4326`);
 
@@ -388,8 +416,7 @@ export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Elemen
   }, [iconList, iconType]);
 
   useEffect(() => {
-    const source = (api.maps[mapId].layer.getGeoviewLayerById(layerId) as AbstractGeoViewVector)?.activeLayer
-      ?.source as TypeVectorSourceInitialConfig;
+    const source = api.maps[mapId].layer.getGeoviewLayerById(layerId)?.listOfLayerEntryConfig[0]?.source as TypeVectorSourceInitialConfig;
     setIsClusterToggleEnabled(source?.cluster?.enable ?? false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -442,13 +469,12 @@ export function LegendItemDetails(props: TypeLegendItemDetailsProps): JSX.Elemen
           <LegendIconList
             iconImages={iconList}
             iconLabels={labelList}
-            isParentVisible={isChecked}
-            toggleParentVisible={() => setChecked(!isChecked)}
+            onGetCheckedSublayerNames={handleGetCheckedSublayerNames}
+            mapId={mapId}
             toggleMapVisible={(sublayerConfig) => {
               (geoviewLayerInstance as AbstractGeoViewVector | EsriDynamic).applyViewFilter(sublayerConfig);
             }}
             layerConfig={geometryLayerConfig as TypeVectorLayerEntryConfig}
-            mapId={mapId}
             geometryKey={layerGeometryKey!}
           />
         )}
