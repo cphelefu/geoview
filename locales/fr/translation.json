@@ -6,7 +6,8 @@
     "name": "Nom",
     "exit": "Sortir",
     "open": "Ouvrir",
-    "remove": "Retirer"
+    "remove": "Retirer",
+    "view": "Vue"
   },
   "mapnav": {
     "arianavbar": "groupe de buttons vertical pour navigation sur la carte",
@@ -190,6 +191,7 @@
   },
   "footerTabsContainer": {
     "focusToMap": "Aller à la carte",
-    "focusToFooter": "Aller au pied de page"
+    "focusToFooter": "Aller au pied de page",
+    "resizeTooltip": "Redimensionner"
   }
 }
