@@ -26,12 +26,7 @@
   "theme": "light",
   "navBar": ["zoom", "fullscreen", "home", "location", "export"],
   "components": [],
-  "footerTabs": {
-    "tabs": {
-      "core": []
-    }
-  },
-  "corePackages": [],
+  "corePackages": ["footer-panel"],
   "externalPackages": [],
   "suportedLanguages": ["en"]
 }

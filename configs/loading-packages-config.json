@@ -14,6 +14,6 @@
   },
   "theme": "dark",
   "components": ["north-arrow", "overview-map"],
-  "corePackages": ["basemap-panel"],
+  "corePackages": ["basemap-panel", "layers-panel", "details-panel"],
   "suportedLanguages": ["en"]
 }

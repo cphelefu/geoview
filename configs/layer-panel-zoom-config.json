@@ -94,12 +94,10 @@
   },
   "theme": "dark",
   "components": [],
-  "footerTabs": {
-    "tabs": {
-      "core": ["legend", "layers", "details"]
-    }
-  },
-  "corePackages": [],
+  "corePackages": [
+    "layers-panel",
+    "footer-panel"
+  ],
   "suportedLanguages": [
     "en"
   ]
