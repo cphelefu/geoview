@@ -31,6 +31,7 @@ export const LOG_WARNING = 40;
 // For errors and exceptions that cannot be handled. Enabled by default. Shows all the time.
 export const LOG_ERROR = 50;
 ```
+![image](https://github.com/Canadian-Geospatial-Platform/geoview/assets/3472990/0e9b93a7-c660-4768-ac8d-aa0b37f04d0b)
 
 The `logger` is active when (1) running in dev environment or (2) the local storage `GEOVIEW_LOG_ACTIVE` key is set.
 
