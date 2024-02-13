@@ -61,7 +61,7 @@
           {
             'geoviewLayerId': 'geojsonLYR1',
             'geoviewLayerName': { 'en': 'GeoJSON Sample', 'fr': 'GeoJSON Échantillon' },
-            'metadataAccessPath': { 'en': './geojson/metadata.json', 'fr': './geojson/metadata.json' },
+            'metadataAccessPath': { 'en': './datasets/geojson/metadata.json', 'fr': './datasets/geojson/metadata.json' },
             'geoviewLayerType': 'GeoJSON',
             'listOfLayerEntryConfig': [
               {
@@ -183,7 +183,7 @@
             {
               'geoviewLayerId': 'geojsonLYR1',
               'geoviewLayerName': { 'en': 'GeoJSON Sample', 'fr': 'GeoJSON Échantillon' },
-              'metadataAccessPath': { 'en': './geojson/metadata.json', 'fr': './geojson/metadata.json' },
+              'metadataAccessPath': { 'en': './datasets/geojson/metadata.json', 'fr': './datasets/geojson/metadata.json' },
               'geoviewLayerType': 'GeoJSON',
               'listOfLayerEntryConfig': [
                 {
@@ -242,6 +242,128 @@
       'corePackages': [],
       'externalPackages': [],
       'suportedLanguages': ['en', 'fr']
+    }"></div><hr/><div class="map-title-holder"><h4 id="HUC3">2. Basic Map English Light theme</h4><a class="ref-link" href="#top">Top</a></div><div id="mapWM3" class="geoview-map" data-lang="en" data-config="{
+        'map': {
+          'interaction': 'dynamic',
+          'viewSettings': {
+            'zoom': 3,
+            'center': [-100, 50],
+            'projection': 3978
+          },
+          'basemapOptions': {
+            'basemapId': 'osm',
+            'shaded': false,
+            'labeled': false
+          },
+          'listOfGeoviewLayerConfig': [
+            {
+              'geoviewLayerId': 'esriFeatureLYR4',
+              'geoviewLayerName': {
+                'en': 'Water quality at monitoring sites',
+                'fr': 'Qualite de eau'
+              },
+              'metadataAccessPath': {
+                'en': 'https://maps-cartes.ec.gc.ca/arcgis/rest/services/DMS/DEU_CSO_Volume/MapServer',
+                'fr': 'https://maps-cartes.ec.gc.ca/arcgis/rest/services/DMS/DEU_CSO_Volume/MapServer'
+              },
+              'geoviewLayerType': 'esriFeature',
+              'initialSettings': { 'visible': 'always' },
+              'listOfLayerEntryConfig': [
+                {
+                  'layerId': '8'
+                }
+              ]
+            },
+            {
+              'geoviewLayerId': 'uniqueValueId',
+              'geoviewLayerName': { 'en': 'uniqueValue', 'fr': 'uniqueValue' },
+              'metadataAccessPath': { 'en': 'https://maps-cartes.ec.gc.ca/arcgis/rest/services/CESI/MapServer/', 'fr': 'https://maps-cartes.ec.gc.ca/arcgis/rest/services/CESI/MapServer/' },
+              'geoviewLayerType': 'esriFeature',
+              'listOfLayerEntryConfig': [
+                {
+                  'layerId': '1'
+                }
+              ]
+            },
+            {
+              'geoviewLayerId': 'esriFeatureLYR5',
+              'geoviewLayerName': {
+                'en': 'Top Projects',
+                'fr': 'Projets super'
+              },
+              'metadataAccessPath': {
+                'en': 'https://maps-cartes.services.geo.ca/server_serveur/rest/services/NRCan/900A_and_top_100_en/MapServer/',
+                'fr': 'https://maps-cartes.services.geo.ca/server_serveur/rest/services/NRCan/900A_and_top_100_en/MapServer/'
+              },
+              'geoviewLayerType': 'esriFeature',
+              'listOfLayerEntryConfig': [
+                {
+                  'layerId': '0'
+                }
+              ]
+            },
+            {
+              'geoviewLayerId': 'geojsonLYR1',
+              'geoviewLayerName': { 'en': 'GeoJSON Sample', 'fr': 'GeoJSON Échantillon' },
+              'metadataAccessPath': { 'en': './geojson/metadata.json', 'fr': './geojson/metadata.json' },
+              'geoviewLayerType': 'GeoJSON',
+              'listOfLayerEntryConfig': [
+                {
+                  'layerId': 'polygons.json',
+                  'layerName': { 'en': 'Polygons', 'fr': 'Polygones' }
+                },
+                {
+                  'layerId': 'lines.json',
+                  'layerName': { 'en': 'Lines', 'fr': 'Lignes' }
+                },
+                {
+                  'entryType': 'group',
+                  'layerId': 'point-feature-group',
+                  'layerName': { 'en': 'point-feature-group', 'fr': 'point-feature-group' },
+                  'listOfLayerEntryConfig': [
+                    {
+                      'layerId': 'icon_points.json',
+                      'layerName': { 'en': 'Icons', 'fr': 'Icones' },
+                      'initialSettings': { 'visible': 'yes' }
+                    },
+                    {
+                      'layerId': 'points.json',
+                      'layerName': { 'en': 'Points', 'fr': 'Points' }
+                    },
+                    {
+                      'layerId': 'points_1.json',
+                      'layerName': { 'en': 'Points 1', 'fr': 'Points 1' }
+                    },
+                    {
+                      'layerId': 'points_2.json',
+                      'layerName': { 'en': 'Points 2', 'fr': 'Points 2' }
+                    },
+                    {
+                      'layerId': 'points_3.json',
+                      'layerName': { 'en': 'Points 3', 'fr': 'Points 3' }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+      'theme': 'light',
+      'appBar': {
+        'tabs': {
+          'core': ['geolocator', 'export']
+        }
+      },
+      'navBar': ['zoom', 'fullscreen', 'home', 'location', 'export'],
+      'footerBar': {
+        'tabs': {
+          'core': ['legend', 'layers', 'details', 'data-table']
+        }
+      },
+      'components': ['north-arrow'],
+      'corePackages': [],
+      'externalPackages': [],
+      'suportedLanguages': ['en', 'fr']
     }"></div><hr/><script src="codedoc.js"></script><script>// initialize cgpv and api events, a callback is optional, used if calling api's after the rendering is ready
       cgpv.init(function () {
         console.log('api is ready');
@@ -272,31 +394,33 @@
           tableRowElement.appendChild(tableDataText);
           if (key === 'all')
             configureTableRow(true, tableDataText.id, 'All layers are', buttonDisableElement.id, buttonEnableElement.id, '');
-          else
-            configureTableRow(true, tableDataText.id, `layer "${key}" is`, buttonDisableElement.id, buttonEnableElement.id, key);
-        }
+          else configureTableRow(true, tableDataText.id, `layer "${key}" is`, buttonDisableElement.id, buttonEnableElement.id, key);
+        };
 
         const getEventListenerFunctions = (clickFlag) => {
           if (clickFlag.endsWith('click-text')) {
-            return [cgpv.api.getFeatureInfoLayerSet('mapWM1').isClickListenerEnabled,
+            return [
+              cgpv.api.getFeatureInfoLayerSet('mapWM1').isClickListenerEnabled,
               cgpv.api.getFeatureInfoLayerSet('mapWM1').disableClickListener,
               cgpv.api.getFeatureInfoLayerSet('mapWM1').enableClickListener,
-              cgpv.api.getFeatureInfoLayerSet('mapWM1')
+              cgpv.api.getFeatureInfoLayerSet('mapWM1'),
             ];
           } else {
-            return [cgpv.api.getFeatureInfoLayerSet('mapWM1').isHoverListenerEnabled,
+            return [
+              cgpv.api.getFeatureInfoLayerSet('mapWM1').isHoverListenerEnabled,
               cgpv.api.getFeatureInfoLayerSet('mapWM1').disableHoverListener,
               cgpv.api.getFeatureInfoLayerSet('mapWM1').enableHoverListener,
-              cgpv.api.getFeatureInfoLayerSet('mapWM1')
+              cgpv.api.getFeatureInfoLayerSet('mapWM1'),
             ];
           }
-        }
+        };
 
         const configureTableRow = (setClickListener, textCellId, text, disableId, enableId, layerPath) => {
           const [isEventListenerEnabled, disableEventListener, enableEventListener, layerSet] = getEventListenerFunctions(textCellId);
           const textCell = document.getElementById(textCellId);
           const layerFlagDisabled = !isEventListenerEnabled.call(layerSet, layerPath);
-          const disableButton = document.getElementById(disableId);          const enableButton = document.getElementById(enableId);
+          const disableButton = document.getElementById(disableId);
+          const enableButton = document.getElementById(enableId);
           if (setClickListener) {
             disableButton.addEventListener('click', (e) => {
               disableEventListener.call(layerSet, layerPath);
@@ -315,16 +439,16 @@
           } else if (layerFlagDisabled) {
             disableButton.disabled = true;
             enableButton.disabled = false;
-            textCell.innerText =  `${text} disabled`;
+            textCell.innerText = `${text} disabled`;
           } else {
             disableButton.disabled = false;
             enableButton.disabled = true;
-            textCell.innerText =  `${text} enabled`;
+            textCell.innerText = `${text} enabled`;
           }
-        }
+        };
 
         const updateButtonTable = () => {
-          const registeredLayers = cgpv.api.maps.mapWM1?.layer?.registeredLayers
+          const registeredLayers = cgpv.api.maps.mapWM1?.layer?.registeredLayers;
           let firstpass = true;
           Object.keys(registeredLayers).forEach((key) => {
             if (['processed', 'loaded'].includes(registeredLayers[key].layerStatus)) {
@@ -340,7 +464,7 @@
               }
             }
           });
-        }
+        };
 
         const displayField = document.getElementById('buttonTable');
         displayField.innerHTML = `<table id="buttonTable" style="width:100%">
@@ -357,7 +481,7 @@
             </td>
           </tr>
         </table>`;
-        const registeredLayers = cgpv.api.maps.mapWM1?.layer?.registeredLayers
+        const registeredLayers = cgpv.api.maps.mapWM1?.layer?.registeredLayers;
         let firstpass = true;
         Object.keys(registeredLayers).forEach((key) => {
           if (['processed', 'loaded'].includes(registeredLayers[key].layerStatus)) {
@@ -372,7 +496,7 @@
               fillTableRow(key, 'hover-table', 'hover-disable', 'hover-enable', 'hover-text');
             }
           }
-        })
+        });
 
         //create snippets
         createConfigSnippet();
