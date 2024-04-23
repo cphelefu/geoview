@@ -24,7 +24,7 @@
     ]
   },
   "theme": "light",
-  "navBar": ["zoom", "fullscreen", "home", "location"],
+  "navBar": ["zoom", "fullscreen", "home", "location", "export"],
   "components": [],
   "footerBar": {
     "tabs": {
