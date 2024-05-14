@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Canadian Geospatial Platform Viewer</title><link rel="shortcut icon" href="./favicon.ico"/><meta name="msapplication-TileColor" content="#da532c"/><meta name="msapplication-config" content="./img/browserconfig.xml"/><meta name="theme-color" content="#ffffff"/><meta name="msapplication-TileColor" content="#da532c"/><meta name="theme-color" content="#ffffff"/><link href="https://fonts.googleapis.com/css?family=Roboto|Montserrat:200,300,400,900|Merriweather" rel="stylesheet"/><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><link rel="stylesheet" href="css/style.css"/><style>.editor {
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Canadian Geospatial Platform Viewer</title><link rel="shortcut icon" href="./favicon.ico"/><meta name="msapplication-TileColor" content="#da532c"/><meta name="msapplication-config" content="./img/browserconfig.xml"/><meta name="theme-color" content="#ffffff"/><meta name="msapplication-TileColor" content="#da532c"/><meta name="theme-color" content="#ffffff"/><link rel="stylesheet" href="css/style.css"/><style>.editor {
       display: inline-flex;
       gap: 10px;
       font-family: monospace;
@@ -135,8 +135,8 @@
       a.value = 'sandboxMap';
       newDiv.setAttributeNode(a);
 
-      const mapWidth = document.getElementById('mapWidth')?.value + "px";
-      const mapHeight = document.getElementById('mapHeight')?.value + "px";
+      const mapWidth = `${document.getElementById('mapWidth')?.value}px`;
+      const mapHeight = `${document.getElementById('mapHeight')?.value}px`;
 
       newDiv.style.width = mapWidth;
       newDiv.style.minHeight = mapHeight;
@@ -155,11 +155,11 @@
 
 
     // Map Size=====================Start==================================
-    const applyMapSizeBtn = document.getElementById("applyMapSize");
-    const mapWidthInput = document.getElementById("mapWidth");
-    const mapHeightInput = document.getElementById("mapHeight");
+    const applyMapSizeBtn = document.getElementById('applyMapSize');
+    const mapWidthInput = document.getElementById('mapWidth');
+    const mapHeightInput = document.getElementById('mapHeight');
 
-    applyMapSizeBtn.addEventListener("click", () => {
+    applyMapSizeBtn.addEventListener('click', () => {
       const mapWidth = document.getElementById('mapWidth')?.value;
       const mapHeight = document.getElementById('mapHeight')?.value;
 
@@ -173,12 +173,12 @@
       }
     });
 
-    mapWidthInput.addEventListener("input", () => {
-      applyMapSizeBtn.removeAttribute("disabled");
+    mapWidthInput.addEventListener('input', () => {
+      applyMapSizeBtn.removeAttribute('disabled');
     });
 
-    mapHeightInput.addEventListener("input", () => {
-      applyMapSizeBtn.removeAttribute("disabled");
+    mapHeightInput.addEventListener('input', () => {
+      applyMapSizeBtn.removeAttribute('disabled');
     })
 
     const widthInput = document.getElementById('mapWidth');
@@ -186,15 +186,15 @@
 
     // Set the map width input value based on map section width.
     if (widthInput) {
-      const mapSection = document.getElementById("mapSection");
+      const mapSection = document.getElementById('mapSection');
       widthInput.value = mapSection.clientWidth;
     }
 
-    document.getElementById('mapHeight').value = "900";
+    document.getElementById('mapHeight').value = '900';
 
-    const sandboxMap = document.getElementById("sandboxMap");
+    const sandboxMap = document.getElementById('sandboxMap');
     if (sandboxMap) {
-      sandboxMap.dataset.height = "900px"
+      sandboxMap.dataset.height = '900px'
     }
 
     // Map Size=====================End==================================
