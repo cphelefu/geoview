@@ -15,14 +15,17 @@
     "fullScreen": "Plein écran"
   },
   "mapnav": {
-    "arianavbar": "Groupe de buttons vertical pour navigation sur la carte",
-    "fullscreen": "Plein écran",
+    "arianavbar": "groupe de buttons vertical pour navigation sur la carte",
+    "export": "Exporter la carte en PNG",
+    "fullscreen": "Plein Écran",
     "home": "Retour à la vue initiale",
     "zoomIn": "Zoom avant",
     "zoomOut": "Zoom arrière",
     "coordinates": "Basculer le format des coordonnées",
     "scale": "Basculer entre l'échelle et la résolution",
-    "location": "Zoom sur ma position"
+    "location": "Zoom sur ma position",
+    "collapseBtn": "Réduire",
+    "expandBtn": "Agrandir"
   },
   "mapctrl": {
     "rotation": {
@@ -43,59 +46,69 @@
       "defaultnrcan": "© Sa Majesté le Roi du Chef du Canada, représentée par le ministre des Ressources naturelle",
       "tooltip": "Attribution"
     },
-    "crosshair": "Utiliser les touches <strong>fléchées</strong>, <strong>+</strong> et <strong>-</strong> pour naviguer sur la carte, <strong>Entrée</strong> pour sélectionner et <strong>Shift+fléchées</strong> <strong>Haut</strong> et <strong>Bas</strong> pour modfier le déplacement."
+    "crosshair": "Utilisez les touches <strong>fléchées</strong>, <strong>+</strong> et <strong>-</strong> pour naviguer sur la carte, <strong>Entrée</strong> pour sélectionner et <strong>Shift+fléchées</strong> <strong>Haut</strong> et <strong>Bas</strong> pour modfier le déplacement."
   },
   "appbar": {
     "export": "Exporter",
-    "notifications": "Notification",
+    "notifications": "Avis",
     "no_notifications_available": "Aucune notification disponible",
+    "fullscreen": "Plein écran",
+    "help": "Aide",
     "layers": "Couches",
     "share": "Partager",
     "version": "À propos de GéoView",
-    "repoLink": "GitHub"
+    "repoLink": "Lien repo",
+    "removeAllNotifications": "Effacer tout"
   },
   "legend": {
     "title": "Légende",
-    "removeLayer": "Retirer la couche",
-    "zoomTo": "Zoom sur la couche",
-    "addLayer": "Ajouter une couche",
-    "sortLayers": "Trier les couches",
+    "unknown": "Titre de légende inconnu",
+    "removeLayer": "Supprimer le calque",
+    "toggleOpacity": "Basculer le Opacité DEPRECATED",
+    "zoomTo": "Zoom sur la Couche",
+    "addLayer": "Ajouter un calque",
+    "sortLayers": "Trier les calques",
     "sort": "Trier",
     "layerError": "La couche a une erreur...",
     "layerLoading": "La couche se charge...",
-    "tableDetails": "Table détaillée",
+    "tableDetails": "Détails du tableau",
     "refreshLayer": "Rafraîchir la couche",
-    "highlightLayer": "Couche mise en évidence",
+    "highlightLayer": "Couche de mise en évidence",
     "subLayersCount": "{count} sous-couches",
-    "itemsCount": "{count} sur {totalCount} classes",
+    "itemsCount": "{count} sur {totalCount} éléments",
     "legendInstructions": "Legend Instructions",
     "noLayersAdded": "Aucune couche ajoutée",
     "noLayersAddedDescription": "Ajoutez des couches à la carte en cliquant sur le bouton 'Couches' et en sélectionnant les couches que vous souhaitez afficher."
   },
   "layers": {
-    "title": "Couches",
+    "title": "Couche",
     "subLayersList": "Liste des sous-couches",
-    "finish": "Terminer",
+    "removingLayers": "Suppression des couches",
+    "reArrangeLayers": "Réorganiser les couches",
+    "addingNewLayer": "Ajout d'une nouvelle couche",
+    "completeTable": "Pour des données complètes, veuillez consulter les onglets des tableaux de données.",
+    "dataModalFeaturesDisplayed": "{numberOfFeatures} des {totalNumberOfFeatures} caractéristiques affichées",
+    "finish": "Finir",
     "continue": "Continuer",
     "back": "Retour",
     "or": "ou",
-    "dropzone": "Déposer ici",
+    "dropzone": "Déposez ici",
     "upload": "Choisir un fichier",
-    "drop": "Déposer le fichier à télécharger",
-    "url": "Entrer l'URL ou l'identifiant Geocore",
+    "drop": "Déposez le fichier à télécharger",
+    "url": "Entrer l'URL ou l'UUID",
     "layer": "Couche",
-    "stepOne": "Ajouter un fichier ou entrer l'URL/ l'identifiant Geocore",
-    "stepTwo": "Sélectionner le format",
+    "stepOne": "Ajouter un fichier ou entrer l'URL/UUID",
+    "stepTwo": "Sélectionnez le format",
     "stepThree": "Configurer la couche",
-    "stepFour": "Entrer le nom",
+    "stepFour": "Entrez le nom",
     "service": "Type de service",
     "name": "Nom",
-    "layerSelect": "Sélectionner couche(s)",
+    "layerSelect": "Sélectionner la couche",
     "errorEmpty": "ne peut être vide",
     "errorNone": "Pas de fichier ou de source ajouté",
-    "errorFile": "Seuls les fichiers geoJSON, CSV et GeoPackage peuvent être utilisés",
+    "errorFile": "Seuls les fichiers geoJSON et GeoPackage peuvent être utilisés",
     "errorServer": "source n'est pas valide",
-    "errorNotLoaded": "Une erreur s'est produite lors du chargement de la couche",
+    "errorNotLoaded": "Une erreur s'est produite lors du chargement de la couche geoview",
     "errorProj": "ne prend pas en charge la projection cartographique actuelle",
     "only": "seulement",
     "opacity": "Opacité",
@@ -114,14 +127,18 @@
     "zoomTo": "Zoom à l'élément",
     "select": "Sélectionner l'élément sur la carte",
     "externalLink": "Lien externe",
-    "feature": "élément",
+    "detailsView": "Vue détaillée",
+    "feature": "item",
     "clickOnMap": "Cliquer sur la carte",
-    "nextFeatureBtn": "Élément suivant",
-    "previousFeatureBtn": "Élément précédent",
-    "clearAllfeatures": "Déselctionner tout les Élément",
+    "nextFeatureBtn": "Item suivant",
+    "previousFeatureBtn": "Item précédent",
+    "clearAllfeatures": "Déselctionner tout les items",
+    "highlightFeaturesOnMap": "Déselctionner tout les items",
     "keepFeatureSelected": "Garder l'élément sélectionné",
+    "detailsInstructions": "Instructions détaillées",
+    "loadingUI": "Chargement de l'interface utilisateur",
     "featureDetailsTitle": "Élément {count} sur {total}",
-    "featureDetailModalTitle": "Détails de l'élément"
+    "featureDetailModalTitle": "Item"
   },
   "lightbox": {
     "next": "Prochaine",
@@ -144,10 +161,10 @@
   "validation": {
     "layer": {
       "loadfailed": "Le chargement de la couche [__param__] a échoué sur la carte __param__.",
-      "notfound": "La sous couche __param__ de la couche __param__ n'existe pas sur le sereur",
+      "notfound": "La sous couche __param__ de la couche GeoView __param__ n'existe pas sur le sereur",
       "createtwice": "On ne peut exécuter deux fois la méthode createGeoViewRasterLayers pour la couche __param__ sur la carte __param__",
-      "usedtwice": "Utilisation en double de l'identifiant de couche [__param__] sur la carte __param__",
-      "multipleUUID": "Les couches GeoCore ne peuvent avoir qu'un seul identifiant par couche."
+      "usedtwice": "Utilisation en double de l'identifiant de couche geoview [__param__] sur la carte __param__",
+      "multipleUUID": "Les couches GeoCore ne peuvent avoir qu'un seul UUID GeoCore par couche."
     },
     "schema": {
       "notFound": "Une erreur de schéma a été trouvée, vérifiez la console pour voir ce qui ne va pas.",
@@ -157,7 +174,7 @@
     "changeDisplayLanguage": "Seulement 'en' et 'fr' sont supporées",
     "changeDisplayTheme": "Theme non supporté",
     "changeDisplayProjection": "Projection non supportée",
-    "invalidConfig": "Configuration JSON non valide, configuration par défaut appliquée."
+    "invalidConfig": "Configuration JSON non valide, configuration par défaut appliquée"
   },
   "exportModal": {
     "title": "Exporter la carte en PNG",
@@ -185,25 +202,26 @@
     "details": "DÉTAILS",
     "exportBtn": "Exporter",
     "jsonExportBtn": "Télécharger GeoJSON",
-    "downloadAsCSV": "Télécharger CSV",
+    "downloadAsCSV": "Télécharger la CSV",
     "filterMap": "Filtrer la carte",
-    "stopFilterMap": "Arrêt des filtres",
+    "stopFilterMap": "Filtrer la carte d'arrêt",
     "rowsSelected": "{rowsSelected} sur {totalRows} ligne(s) sélectionnée(s)",
     "rowsFiltered": "{rowsFiltered} sur {totalRows} ligne(s) filtrée(s)",
     "enlargeBtn": "Agrandir",
     "reduceBtn": "Réduire",
-    "features": "Élément(s)",
-    "featureFiltered": "élément filtré(s)",
+    "features": "Item(s)",
+    "featureFiltered": "Item filtrée(s)",
     "images": "Images",
     "close": "Fermer",
+    "dataTableInstructions": "Instructions relatives aux tableaux de données",
     "noFeatures": "inconnue..."
   },
   "geochart": {
-    "noChartAvailable": "Cliquer sur une couche de la carte qui contient un graphique"
+    "noChartAvailable": "Cliquez sur la couche de carte avec le graphique"
   },
   "guide": {
     "title": "Guide",
-    "errorMessage": "Désolé, impossible de trouver le document d'aide!"
+    "errorMessage": "Désolé, impossible de trouver le document d'aide !"
   },
   "footerBar": {
     "focusToMap": "Aller à la carte",

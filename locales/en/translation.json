@@ -10,19 +10,22 @@
     "view": "View",
     "openFullscreen": "Open in fullscreen",
     "closeFullscreen": "Close fullscreen",
-    "openGuide": "Open guide",
+    "openGuide": "Open Guide",
     "guide": "Guide",
-    "fullScreen": "Full screen"
+    "fullScreen": "Full Screen"
   },
   "mapnav": {
-    "arianavbar": "Vertical button group for map navigation",
-    "fullscreen": "Full screen",
+    "arianavbar": "vertical button group for map navigation",
+    "fullscreen": "Full Screen",
     "home": "Reset to initial view",
+    "export": "Export map as PNG",
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
-    "coordinates": "Toggle coordinates format",
+    "coordinates": "Toggle Coordinates format",
     "scale": "Toggle between scale and resolution",
-    "location": "Zoom to my location"
+    "location": "Zoom to my location",
+    "collapseBtn": "Collapse",
+    "expandBtn": "Expand"
   },
   "mapctrl": {
     "rotation": {
@@ -36,7 +39,7 @@
       "south": "S"
     },
     "overviewmap": {
-      "toggle": "Toggle overview map",
+      "toggle": "Toggle minimap",
       "error": "Error loading overview map"
     },
     "attribution": {
@@ -47,55 +50,65 @@
   },
   "appbar": {
     "export": "Export",
-    "notifications": "Notification",
+    "notifications": "Notifications",
     "no_notifications_available": "No notifications available",
+    "fullscreen": "Full Screen",
+    "help": "Help",
     "layers": "Layers",
     "share": "Share",
     "version": "About GeoView",
-    "repoLink": "GitHub"
+    "repoLink": "Repo link",
+    "removeAllNotifications": "Remove all"
   },
   "legend": {
     "title": "Legend",
-    "removeLayer": "Remove layer",
-    "zoomTo": "Zoom to layer",
-    "addLayer": "Add layer",
-    "sortLayers": "Sort layers",
+    "unknown": "Unknown Layer Title",
+    "removeLayer": "Remove Layer",
+    "toggleOpacity": "Toggle Opacity DEPRECATED",
+    "zoomTo": "Zoom to Layer",
+    "addLayer": "Add Layer",
+    "sortLayers": "Sort Layers",
     "sort": "Sort",
     "layerError": "Layer has an error...",
     "layerLoading": "Layer is loading...",
     "tableDetails": "Table details",
     "refreshLayer": "Refresh layer",
     "highlightLayer": "Highlight layer",
-    "subLayersCount": "{count} sublayers",
-    "itemsCount": "{count} of {totalCount} classes",
+    "subLayersCount": "{count} sub-layers",
+    "itemsCount": "{count} of {totalCount} items",
     "legendInstructions": "Legend Instructions",
     "noLayersAdded": "No layers added to the map",
     "noLayersAddedDescription": "Add layers to the map by clicking on the 'Layers' button and adding the layers you want to display."
   },
   "layers": {
     "title": "Layers",
-    "subLayersList": "Sublayers list",
+    "subLayersList": "Sublayers List",
+    "removingLayers": "Removing Layers",
+    "reArrangeLayers": "Re-arrange Layers",
+    "addingNewLayer": "Adding a new layer",
+    "completeTable": "For complete data, please check data table tabs.",
+    "dataModalFeaturesDisplayed": "{numberOfFeatures} of {totalNumberOfFeatures} features displayed.",
     "finish": "Finish",
     "continue": "Continue",
     "back": "Back",
     "or": "or",
-    "dropzone": "Drop here",
-    "upload": "Choose a file",
+    "dropzone": "Drop Here",
+    "upload": "Choose a File",
     "drop": "Drop the file to upload",
-    "url": "Enter URL or Geocore id",
+    "url": "Enter URL or UUID",
     "layer": "Layer",
-    "stepOne": "Upload a file or enter URL/Geocore id",
+    "stepOne": "Upload a File or enter URL/UUID",
     "stepTwo": "Select format",
     "stepThree": "Configure layer",
-    "stepFour": "Enter name",
-    "service": "Service type",
+    "stepFour": "Enter Name",
+    "service": "Service Type",
     "name": "Name",
-    "layerSelect": "Select layer(s)",
+    "layerSelect": "Select Layer",
     "errorEmpty": "cannot be empty",
     "errorNone": "No file or source added",
-    "errorFile": "Only geoJSON, CSV and GeoPackage files can be used",
+    "errorFile": "Only geoJSON and GeoPackage files can be used",
     "errorServer": "source is not valid",
-    "errorNotLoaded": "An error occured when loading the layer",
+    "errorNotLoaded": "An error occured when loading the geoview layer",
     "errorProj": "does not support current map projection",
     "only": "only",
     "opacity": "Opacity",
@@ -114,12 +127,16 @@
     "zoomTo": "Zoom to feature",
     "select": "Highlight feature on map",
     "externalLink": "External Link",
+    "detailsView": "Details View",
     "feature": "feature",
     "clickOnMap": "Click on map",
     "nextFeatureBtn": "Next feature",
     "previousFeatureBtn": "Previous feature",
     "clearAllfeatures": "Clear all feature highlights",
+    "highlightFeaturesOnMap": "Highlight features on map",
     "keepFeatureSelected": "Keep feature highlighted",
+    "detailsInstructions": "Details Instructions",
+    "loadingUI": "Loading user interface",
     "featureDetailsTitle": "Feature {count} of {total}",
     "featureDetailModalTitle": "Feature Detail"
   },
@@ -133,7 +150,7 @@
     "start": "Skip after map element",
     "end": "Skip before map element",
     "focusdialog": {
-      "title": "Keyboard navigation",
+      "title": "Keyboard Navigation",
       "main": "If enable, we will keep focus locked on the viewer.\nTo exit, press <strong>CTRL + Q</strong>",
       "button": {
         "enable": "Enable",
@@ -144,10 +161,10 @@
   "validation": {
     "layer": {
       "loadfailed": "Layer [__param__] failed to load on map __param__.",
-      "notfound": "The sublayer __param__ of the  layer __param__ does not exist on the server",
+      "notfound": "The sublayer __param__ of the GeoView layer __param__ does not exist on the server",
       "createtwice": "Can not execute the createGeoViewRasterLayers method twice for the layer __param__ on map __param__",
-      "usedtwice": "Duplicate use of layer identifier [__param__] on map __param__",
-      "multipleUUID": "GeoCore layers may only have one GeoCore id per layer"
+      "usedtwice": "Duplicate use of geoview layer identifier [__param__] on map __param__",
+      "multipleUUID": "GeoCore layers may only have one GeoCore UUID per layer"
     },
     "schema": {
       "notFound": "A schema error was found, check the console to see what is wrong.",
@@ -157,10 +174,10 @@
     "changeDisplayLanguage": "Only 'en' and 'fr' are supported",
     "changeDisplayTheme": "Theme unsupported",
     "changeDisplayProjection": "Projection unsupported",
-    "invalidConfig": "Invalid JSON config, default configuration applied."
+    "invalidConfig": "Invalid JSON config, default configuration applied"
   },
   "exportModal": {
-    "title": "Export map as PNG",
+    "title": "Export Map as PNG",
     "cancelBtn": "Cancel",
     "exportBtn": "Export",
     "exportTitle": "Title",
@@ -172,8 +189,8 @@
     "errorMessage": "No matches found for",
     "province": "Province",
     "category": "Category",
-    "clearFilters": "Clear filters",
-    "noFilter": "No filter"
+    "clearFilters": "Clear Filters",
+    "noFilter": "No Filter"
   },
   "hovertooltip": {
     "alticon": "Selected feature icon"
@@ -185,9 +202,9 @@
     "details": "DETAILS",
     "exportBtn": "Export",
     "jsonExportBtn": "Download GeoJSON",
-    "downloadAsCSV": "Download CSV",
-    "filterMap": "Filter map",
-    "stopFilterMap": "Stop filter map",
+    "downloadAsCSV": "Download as CSV",
+    "filterMap": "Filter Map",
+    "stopFilterMap": "Stop Filter Map",
     "rowsSelected": "{rowsSelected} of {totalRows} row(s) selected",
     "rowsFiltered": "{rowsFiltered} of {totalRows} row(s) filtered",
     "enlargeBtn": "Enlarge",
@@ -196,10 +213,11 @@
     "featureFiltered": "features filtered",
     "images": "Images",
     "close": "Close",
+    "dataTableInstructions": "Data Table Instructions",
     "noFeatures": "unknown..."
   },
   "geoChart": {
-    "noChartAvailable": "Click on the map on a layer with chart"
+    "noChartAvailable": "Click on the map layer with chart"
   },
   "guide": {
     "title": "Guide",
@@ -209,6 +227,6 @@
     "focusToMap": "Focus to map",
     "focusToFooter": "Focus to footer",
     "resizeTooltip": "Resize",
-    "noTab": "No tab"
+    "noTab": "No Tab"
   }
 }
