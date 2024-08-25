@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/geoview/demos/static/css/main.f75fdd16.css",
-    "main.js": "/geoview/demos/static/js/main.5ade050f.js",
-    "static/js/453.2e35f551.chunk.js": "/geoview/demos/static/js/453.2e35f551.chunk.js",
-    "index.html": "/geoview/demos/index.html",
-    "main.f75fdd16.css.map": "/geoview/demos/static/css/main.f75fdd16.css.map",
-    "main.5ade050f.js.map": "/geoview/demos/static/js/main.5ade050f.js.map",
-    "453.2e35f551.chunk.js.map": "/geoview/demos/static/js/453.2e35f551.chunk.js.map"
+    "main.css": "/new-demo/static/css/main.f75fdd16.css",
+    "main.js": "/new-demo/static/js/main.7d8f207f.js",
+    "static/js/453.2e35f551.chunk.js": "/new-demo/static/js/453.2e35f551.chunk.js",
+    "index.html": "/new-demo/index.html",
+    "main.f75fdd16.css.map": "/new-demo/static/css/main.f75fdd16.css.map",
+    "main.7d8f207f.js.map": "/new-demo/static/js/main.7d8f207f.js.map",
+    "453.2e35f551.chunk.js.map": "/new-demo/static/js/453.2e35f551.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f75fdd16.css",
-    "static/js/main.5ade050f.js"
+    "static/js/main.7d8f207f.js"
   ]
 }
